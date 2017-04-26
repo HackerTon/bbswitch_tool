@@ -6,6 +6,8 @@ BBSWITCH_LOC=/proc/acpi/bbswitch
 if [ -f $BBSWITCH_LOC ]; then
 	if grep ON $BBSWITCH_LOC >> /dev/null ; then
 		echo "Turning OFF GPU"
+		sudo rmmod nvidia_uvm
+		sudo rmmod nvidia_modeset
 		sudo rmmod nvidia
 		sudo tee $BBSWITCH_LOC <<<OFF
 	else
